@@ -2,14 +2,24 @@ package com.cnar.spring.dao;
 
 import com.cnar.spring.model.Person;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface PersonDao {
 
-    void insertPerson(UUID id, Person person);
+    int insertPerson(UUID id, Person person);
 
-    default void addPerson(Person person) {
+    default int insertPerson(Person person) {
         UUID id = UUID.randomUUID();
-        insertPerson(id, person);
+        return insertPerson(id, person);
     }
+
+    List<Person> getAllPersonsAvailable();
+
+    int deletePerson(UUID id);
+
+    int updatePerson(UUID id, Person person);
+
+    Optional<Person> selectPersonById(UUID id);
 }
