@@ -2,26 +2,41 @@ package com.cnar.spring.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import java.util.UUID;
 
+@Entity
 public class Person {
 
-    private final UUID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @NotBlank
-    private final String name;
+    private String name;
 
-    public Person(@JsonProperty("id") UUID id,
-                  @JsonProperty("name") String name) {
-        this.id = id;
+    public Person() {}
+
+    public Person(@JsonProperty("name") String name) {
         this.name = name;
     }
 
-    public UUID getId() {
+    @Override
+    public String toString() {
+        return "Person [name=" + name + "]";
+    }
+
+    public Long getId() {
         return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
