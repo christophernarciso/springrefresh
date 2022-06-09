@@ -2,6 +2,7 @@ package com.cnar.spring.service;
 
 import com.cnar.spring.model.Person;
 import com.cnar.spring.repository.PersonRepository;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,21 +44,28 @@ public class PersonService {
         System.out.println("Person count: " + headCount);
     }
 
-    public void createPerson(Person person) {
-        personRepository.save(person);
-    }
-
     public List<Person> listAllPersons() {
         return personRepository.findAll();
     }
 
-    public void deletePerson(Long id) {
-        personRepository.deleteById(id);
+    public Person createPerson(Person person) {
+        return personRepository.save(person);
     }
 
-    public void deletePerson(Person person) {
-        Optional<Person> existing = personRepository.getPersonByName(person.getName());
-        existing.ifPresent(p -> personRepository.deleteById(p.getId()));
+    public Person editPerson(Person person) {
+        Person existing = personRepository.getById(person.getId());
+        existing.setName(person.getName());
+        return personRepository.save(existing);
+    }
+
+    public Person editPerson(Long id, Person person) {
+        Person existing = personRepository.getById(id);
+        existing.setName(person.getName());
+        return personRepository.save(existing);
+    }
+
+    public void deletePerson(Long id) {
+        personRepository.deleteById(id);
     }
 
 }
