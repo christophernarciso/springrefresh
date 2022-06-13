@@ -4,6 +4,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,25 +28,33 @@ public class Media implements Serializable {
     @Column(name = "med_artist", length = 50)
     private String artist;
 
-    @OneToOne
-    private MediaType mediaType;
+    @Column(name = "med_type_id")
+    private Long mediaTypeId;
 
     /*
-           The joinColumn attribute will connect to the owner side of the relationship,
-           and the inverseJoinColumn to the other side
-         */
+               The joinColumn attribute will connect to the owner side of the relationship,
+               and the inverseJoinColumn to the other side
+             */
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "media_genres",
             joinColumns = @JoinColumn(name = "med_id"),
             inverseJoinColumns = @JoinColumn(name = "gen_id"))
-    List<Genre> mediaGenres;
+    List<Genre> mediaGenres = new ArrayList<>();
 
     @Column(name = "med_description")
     private String description;
 
     @Column(name = "med_path")
     private String mediaPath;
+
+    public Long getMediaTypeId() {
+        return mediaTypeId;
+    }
+
+    public void setMediaTypeId(Long mediaTypeId) {
+        this.mediaTypeId = mediaTypeId;
+    }
 
 
     public void setId(Long id) {
@@ -79,19 +88,9 @@ public class Media implements Serializable {
     public void setArtist(String artist) {
         this.artist = artist;
     }
-
-    public MediaType getMediaType() {
-        return mediaType;
-    }
-
-    public void setMediaType(MediaType mediaType) {
-        this.mediaType = mediaType;
-    }
-
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -132,9 +131,8 @@ public class Media implements Serializable {
                 "title = " + title + ", " +
                 "author = " + author + ", " +
                 "artist = " + artist + ", " +
-                "mediaType = " + mediaType + ", " +
+                "med_type_id = " + mediaTypeId + ", " +
                 "description = " + description + ", " +
                 "mediaPath = " + mediaPath + ")";
     }
-
 }

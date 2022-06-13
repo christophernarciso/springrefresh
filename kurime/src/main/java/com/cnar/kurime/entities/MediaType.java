@@ -17,10 +17,6 @@ public class MediaType implements Serializable {
 
     @Column(name = "type_name", unique = true, length = 50)
     private String typeName;
-
-    @OneToOne(mappedBy = "mediaType", optional = false)
-    private Media media;
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -36,15 +32,6 @@ public class MediaType implements Serializable {
     public void setTypeName(String typeName) {
         this.typeName = typeName;
     }
-
-    public Media getMedia() {
-        return media;
-    }
-
-    public void setMedia(Media media) {
-        this.media = media;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

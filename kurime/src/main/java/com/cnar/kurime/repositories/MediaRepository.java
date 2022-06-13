@@ -15,10 +15,6 @@ public interface MediaRepository extends JpaRepository<Media, Long> {
 
     Optional<Media> findByArtist(String artist);
 
-    Optional<Media> findByMediaType(MediaType mediaType);
-
     List<Media> getAllByTitle(String title);
-
-    List<Media> getAllByMediaType(MediaType mediaType);
 
 }
