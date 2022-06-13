@@ -1,9 +1,11 @@
 package com.cnar.kurime.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,8 +21,9 @@ public class Genre implements Serializable {
     @Column(name = "gen_name", unique = true, length = 50)
     private String genreName;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "mediaGenres", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Media> media;
+    private List<Media> media = new ArrayList<>();
 
     public void setId(Long id) {
         this.id = id;
