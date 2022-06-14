@@ -18,7 +18,7 @@ public class Genre implements Serializable {
     @Column(name = "gen_id", nullable = false, updatable = false)
     private Long id;
 
-    @Column(name = "gen_name", unique = true, length = 50)
+    @Column(name = "gen_name", unique = true, nullable = false, length = 50)
     private String genreName;
 
     @JsonIgnore

@@ -15,7 +15,7 @@ public class MediaType implements Serializable {
     @Column(name = "type_id", nullable = false, updatable = false)
     private Long id;
 
-    @Column(name = "type_name", unique = true, length = 50)
+    @Column(name = "type_name", unique = true, nullable = false, length = 50)
     private String typeName;
     public void setId(Long id) {
         this.id = id;
