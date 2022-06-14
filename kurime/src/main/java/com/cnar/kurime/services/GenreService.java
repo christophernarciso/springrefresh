@@ -4,7 +4,6 @@ import com.cnar.kurime.entities.Genre;
 import com.cnar.kurime.repositories.GenreRepository;
 import com.cnar.kurime.util.exceptions.GenreNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,4 +45,5 @@ public class GenreService {
     public void deleteGenre(Long id) {
         genreRepository.deleteById(id);
     }
+
 }

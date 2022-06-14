@@ -62,4 +62,5 @@ public class MediaService {
     public void deleteMedia(Long id) {
         mediaRepository.deleteById(id);
     }
+
 }

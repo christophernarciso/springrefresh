@@ -9,9 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface MediaTypeRepository extends JpaRepository<MediaType, Long> {
-
     Optional<MediaType> findByTypeName(String typeName);
 
     List<MediaType> getAllByTypeName(String typeName);
-
 }
